@@ -1,5 +1,5 @@
 from django.urls import path
-from tasks.views import TaskView
+from tasks.views import TaskView, TaskViewDetail
 
 # router = DefaultRouter()
 # router.register(r'/register', UserView)
@@ -7,5 +7,5 @@ from tasks.views import TaskView
 
 urlpatterns = [
     path('tasks/', TaskView.as_view()),
-    # path('projects/<int:id>/', ProjectDetailAPI.as_view()),
+    path('tasks/<int:id>/', TaskViewDetail.as_view()),
 ]

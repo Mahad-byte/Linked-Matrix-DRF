@@ -5,6 +5,7 @@ from project.models import Project
 from profiles.models import Profile
 from rest_framework.response import Response
 from tasks.serializers import TaskSerializer
+from rest_framework import status
 
 
 # Create your views here.
@@ -28,3 +29,28 @@ class TaskView(APIView):
                                    project=project_instance, asignee=asignee_instance)
         task.save()
         return Response("Saved!")
+    
+    
+class TaskViewDetail(APIView):
+    serializer_class = TaskSerializer
+    
+    def get(self, request, id):
+        task = get_object_or_404(Task, id=id)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        task = get_object_or_404(Task, id=id)
+        serializer = TaskSerializer(task, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+    
+        
+    def delete(self, request, id):
+        task = get_object_or_404(Task, id=id)
+        task.delete()
+        return Response("Deleted!!", status=status.HTTP_400_BAD_REQUEST)  
+        
+ 
