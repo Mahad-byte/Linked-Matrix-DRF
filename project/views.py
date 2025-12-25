@@ -12,16 +12,16 @@ class ProjectView(APIView):
     serializer_class = ProjectSerializer
 
     def post(self, request):
-        new_project = Project.objects.create(
-            title="DRF Training", # TODO
-            description="Backend API development"
-        )
-        new_project.save()
-        return Response(f"Added the project with id {new_project}")
+        serializer = ProjectSerializer(data=request.data)
+        if serializer.is_valid():
+            project = serializer.save()
+            return Response(ProjectSerializer(project).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
         queryset = Project.objects.all()
-        return Response(f"Retruning Projects: {queryset}")
+        serializer = ProjectSerializer(queryset, many=True)
+        return Response(serializer.data)
     
 
 class ProjectDetailAPI(APIView):
@@ -43,5 +43,5 @@ class ProjectDetailAPI(APIView):
     def delete(self, request, id):
         project = get_object_or_404(Project, id=id)
         project.delete()
-        return Response("Deleted!!", status=status.HTTP_400_BAD_REQUEST)  
+        return Response(status=status.HTTP_204_NO_CONTENT)  
           
