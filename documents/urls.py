@@ -1,12 +1,11 @@
-from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
-from documents.views import DocumentView, DocumentDetailAPI
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from documents.views import DocumentView
 
-# router = DefaultRouter()
-# router.register(r'/register', UserView)
-# router.register(r'/token', jwt_views.TokenObtainPairView.as_view(), basename='token')
+
+router = DefaultRouter()
+router.register(r'documents', DocumentView, basename='document')
 
 urlpatterns = [
-    path('documents/', DocumentView.as_view()),
-    path('documents/<int:id>/', DocumentDetailAPI.as_view()),
+    path('', include(router.urls)),
 ]

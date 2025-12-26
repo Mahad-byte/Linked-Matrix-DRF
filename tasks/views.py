@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from tasks.models import Task
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from tasks.serializers import TaskSerializer
 from rest_framework import status
@@ -9,6 +10,7 @@ from rest_framework import status
 # Create your views here.
 class TaskView(APIView):
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         tasks = Task.objects.all()
@@ -25,6 +27,7 @@ class TaskView(APIView):
     
 class TaskViewDetail(APIView):
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]
     
     def get(self, request, id):
         task = get_object_or_404(Task, id=id)
@@ -39,10 +42,7 @@ class TaskViewDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
     
-        
     def delete(self, request, id):
         task = get_object_or_404(Task, id=id)
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)  
-        
- 

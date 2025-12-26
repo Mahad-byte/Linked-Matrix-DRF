@@ -1,16 +1,24 @@
 from rest_framework import serializers
 from tasks.models import Task
 from project.models import Project
+from project.serializers import ProjectSerializer
 from profiles.models import Profile
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    project = serializers.PrimaryKeyRelatedField(queryset=Project.objects.all())
+    project = ProjectSerializer()
     asignee = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
-
+    
+    # Seperate write for nested serializer relation
+    project_id = serializers.PrimaryKeyRelatedField(
+        queryset=Project.objects.all(), 
+        source='project',
+        write_only=True
+    )
+    
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'status', 'project', 'asignee']
+        fields = ['id', 'title', 'description', 'status', 'project_id','project', 'asignee']
         read_only_fields = ['id']
 
     def validate_title(self, value):

@@ -9,7 +9,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'title', 'description', 'start_date', 'end_date', 'team_members']
-        read_only_fields = ['id', 'start_date', 'end_date']
+        read_only_fields = ['start_date', 'end_date']
 
     def validate_title(self, value):
         if not value or not value.strip():

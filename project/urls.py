@@ -1,12 +1,12 @@
-from django.urls import path
-from rest_framework_simplejwt import views as jwt_views
-from project.views import ProjectView, ProjectDetailAPI
+from django.urls import path, include
+from project.views import ProjectView
+from rest_framework.routers import DefaultRouter
 
-# router = DefaultRouter()
-# router.register(r'/register', UserView)
-# router.register(r'/token', jwt_views.TokenObtainPairView.as_view(), basename='token')
+
+router = DefaultRouter()
+router.register(r'projects', ProjectView, basename='project')
+
 
 urlpatterns = [
-    path('projects/', ProjectView.as_view()),
-    path('projects/<int:id>/', ProjectDetailAPI.as_view()),
+    path('', include(router.urls)),
 ]
