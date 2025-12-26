@@ -1,8 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from tasks.models import Task
-from project.models import Project
-from profiles.models import Profile
 from rest_framework.response import Response
 from tasks.serializers import TaskSerializer
 from rest_framework import status
