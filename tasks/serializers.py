@@ -6,7 +6,7 @@ from profiles.models import Profile
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    project = ProjectSerializer()
+    project = ProjectSerializer(read_only=True)
     asignee = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
     
     # Seperate write for nested serializer relation
@@ -27,6 +27,7 @@ class TaskSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
+        validated_data.pop('project')
         if not validated_data.get('status'):
             validated_data['status'] = 'todo'
         return super().create(validated_data)

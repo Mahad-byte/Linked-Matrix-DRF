@@ -8,4 +8,4 @@ from rest_framework.permissions import IsAuthenticated
 class ProjectView(ModelViewSet):
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]

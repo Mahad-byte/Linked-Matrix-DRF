@@ -10,7 +10,7 @@ from rest_framework import status
 # Create your views here.
 class TaskView(APIView):
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def get(self, request):
         tasks = Task.objects.all()
