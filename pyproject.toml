@@ -15,7 +15,7 @@ extend-ignore = [
 exclude = [
     ".git",
     "__pycache__",
-    "migrations",
+    "*migrations*",
     "*.pyc",
     ".venv",
     "env"
