@@ -1,6 +1,6 @@
 from rest_framework import serializers
+
 from timeline.models import Timeline
-from project.models import Project
 
 
 class TimelineSerializer(serializers.ModelSerializer):

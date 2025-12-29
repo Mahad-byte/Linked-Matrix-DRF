@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from comments.models import Comment
 from users.models import User
 from tasks.models import Task
@@ -21,6 +22,5 @@ class CommentSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        # Any comment-related business rules can go here later.
         return super().create(validated_data)
 

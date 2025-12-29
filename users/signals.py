@@ -1,7 +1,8 @@
 from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
+
 from users.models import User
 from notifications.models import Notification
-from django.db.models.signals import post_save, post_delete
 
 
 @receiver(post_save, sender=User)

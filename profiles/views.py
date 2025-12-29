@@ -9,4 +9,4 @@ from profiles.serializers import ProfileSerializer
 class ProfileView(ModelViewSet):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]

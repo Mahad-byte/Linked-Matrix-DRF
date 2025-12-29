@@ -1,14 +1,15 @@
 from rest_framework.views import APIView
-from notifications.serializer import NotificationSerializer
-from notifications.models import Notification
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+
+from notifications.serializer import NotificationSerializer
+from notifications.models import Notification
 
 
 # Create your views here.
 class NotificationView(APIView):
     serializer_class = NotificationSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def get(self, request, id=None):
         if id is not None:
