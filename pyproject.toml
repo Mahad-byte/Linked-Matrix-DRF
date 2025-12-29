@@ -9,10 +9,7 @@ profile = "black"
 [tool.flake8]
 max-line-length = 88
 extend-ignore = [
-    "E203",  # Whitespace before ':'
-    "W503",  # Line break before binary operator
     "E501",  # Line too long
-    "F403",  # 'from module import *' used
     "F401",  # Unused imports
 ]
 exclude = [
