@@ -18,3 +18,9 @@ repos:
     rev: 6.0.1
     hooks:
     -   id: isort
+-   repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - flake8-pyproject    # Read configs from pyproject.yaml, not from setup.cfg
