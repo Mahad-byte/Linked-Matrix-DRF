@@ -30,6 +30,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
+        print(f"Validated data: {validated_data}")
         profile_data = validated_data.pop("profile", None)
 
         password = validated_data.pop("password", None)
@@ -46,4 +47,4 @@ class RegisterSerializer(serializers.ModelSerializer):
             profile = Profile.objects.create(user=user, **profile_data)
             print("created profile? ", profile)
 
-        return user
+        return {"id": user.id, "email": user.email, "profile": profile_data}
