@@ -9,11 +9,13 @@ User = get_user_model()
 
 class ProfileAPITest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(id=2, email='user2@example.com', password='1234')
+        self.user = User.objects.create_user(
+            id=2, email="user2@example.com", password="1234"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_create_profile_via_api(self):
-        
+
         self.client.force_authenticate(user=self.user)
         data = {"role": "QA", "contact_number": "1234567890"}
         resp = self.client.post("/api/profiles/", data, format="json")

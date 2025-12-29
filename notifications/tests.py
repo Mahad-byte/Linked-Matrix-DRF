@@ -9,7 +9,9 @@ User = get_user_model()
 
 class NotificationAPITest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(id=2, email='user2@example.com', password='1234')
+        self.user = User.objects.create_user(
+            id=2, email="user2@example.com", password="1234"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_get_notifications_and_mark_read(self):

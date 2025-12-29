@@ -28,3 +28,4 @@ repos:
     rev: '1.9.2'
     hooks:
     - id: bandit
+      args: ['--exclude', 'tests,**/tests/**,**/tests.py,*tests.py']

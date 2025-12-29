@@ -10,12 +10,18 @@ User = get_user_model()
 
 class TimelineAPITest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(id=2, email='user2@example.com', password='1234')
+        self.user = User.objects.create_user(
+            id=2, email="user2@example.com", password="1234"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_timeline_list_includes_created(self):
-        
-        proj_resp = self.client.post("/api/projects/", {"title": "ProjTime", "description": "desc"}, format="json")
+
+        proj_resp = self.client.post(
+            "/api/projects/",
+            {"title": "ProjTime", "description": "desc"},
+            format="json",
+        )
         self.assertEqual(proj_resp.status_code, status.HTTP_201_CREATED)
         project_id = proj_resp.data["id"]
         project = Project.objects.get(id=project_id)

@@ -9,7 +9,9 @@ User = get_user_model()
 
 class ProjectAPITest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(id=2, email='user2@example.com', password='1234')
+        self.user = User.objects.create_user(
+            id=2, email="user2@example.com", password="1234"
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_create_project_via_api(self):
