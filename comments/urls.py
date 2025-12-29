@@ -1,7 +1,6 @@
 from django.urls import path
 
-from comments.views import CommentView, CommentDetailAPI
-
+from comments.views import CommentDetailAPI, CommentView
 
 urlpatterns = [
     path("comments/", CommentView.as_view()),

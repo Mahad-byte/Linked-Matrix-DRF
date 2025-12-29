@@ -1,8 +1,7 @@
 from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
-from users.views import RegisterView, LogoutView
-
+from users.views import LogoutView, RegisterView
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),

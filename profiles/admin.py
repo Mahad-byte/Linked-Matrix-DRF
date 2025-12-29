@@ -1,13 +1,12 @@
 from django.contrib import admin
 
-from project.models import Project
+from comments.models import Comment
+from documents.models import Document
+from notifications.models import Notification
 from profiles.models import Profile
+from project.models import Project
 from tasks.models import Task
 from timeline.models import Timeline
-from documents.models import Document
-from comments.models import Comment
-from notifications.models import Notification
-
 
 # Register your models here.
 admin.site.register(Project)

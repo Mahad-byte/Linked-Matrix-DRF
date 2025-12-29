@@ -1,10 +1,10 @@
-from rest_framework.views import APIView
-from timeline.serializer import TimelineSerializer
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from timeline.models import Timeline
+from timeline.serializer import TimelineSerializer
 
 
 # Create your views here.

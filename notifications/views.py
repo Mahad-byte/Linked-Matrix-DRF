@@ -1,9 +1,9 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from notifications.serializer import NotificationSerializer
 from notifications.models import Notification
+from notifications.serializer import NotificationSerializer
 
 
 # Create your views here.

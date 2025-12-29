@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
 from comments.models import Comment
-from users.models import User
-from tasks.models import Task
 from project.models import Project
+from tasks.models import Task
+from users.models import User
 
 
 class CommentSerializer(serializers.ModelSerializer):

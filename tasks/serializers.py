@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from tasks.models import Task
+from profiles.models import Profile
 from project.models import Project
 from project.serializers import ProjectSerializer
-from profiles.models import Profile
+from tasks.models import Task
 
 
 class TaskSerializer(serializers.ModelSerializer):
