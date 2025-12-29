@@ -21,4 +21,3 @@ class DocumentSerializer(serializers.ModelSerializer):
         if not validated_data.get('version'):
             validated_data['version'] = '1.0'
         return super().create(validated_data)
-

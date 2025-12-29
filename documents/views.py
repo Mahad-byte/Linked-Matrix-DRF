@@ -11,7 +11,7 @@ class DocumentView(mixins.CreateModelMixin,
                    mixins.UpdateModelMixin,
                    mixins.DestroyModelMixin,
                    viewsets.GenericViewSet):
-    
+
     serializer_class = DocumentSerializer
     queryset = Document.objects.all()
     permission_classes = [IsAuthenticated]

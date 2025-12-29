@@ -11,7 +11,7 @@ from timeline.models import Timeline
 class TimelineView(APIView):
     serializer_class = TimelineSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get(self, request):
         queryset = Timeline.objects.all()
         serializer = TimelineSerializer(queryset, many=True)

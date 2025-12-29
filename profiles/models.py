@@ -15,7 +15,7 @@ class Profile(models.Model):
     )
     contact_number = models.CharField(max_length=11)
     user = models.OneToOneField(
-        get_user_model(), on_delete=models.CASCADE, 
-        related_name="user_profile", 
+        get_user_model(), on_delete=models.CASCADE,
+        related_name="user_profile",
         default=2
     )

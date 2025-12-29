@@ -10,7 +10,7 @@ from notifications.models import Notification
 class NotificationView(APIView):
     serializer_class = NotificationSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get(self, request, id=None):
         if id is not None:
             notification = Notification.objects.get(id=id)

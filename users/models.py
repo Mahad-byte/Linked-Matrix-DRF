@@ -21,10 +21,10 @@ class User(AbstractUser):
     @property
     def display_name(self):
         return f"{self.first_name}-$"
-    
+
     def __str__(self):
         return f"{self.email}"
-    
+
     # Meta (Inner Class)
     class Meta:
          verbose_name = 'User'

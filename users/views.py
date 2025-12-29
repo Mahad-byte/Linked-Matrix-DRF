@@ -20,8 +20,8 @@ class RegisterView(APIView):
 
     def get(self, request):
         return Response("Okay In Get!!!!!")
-    
-        
+
+
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 

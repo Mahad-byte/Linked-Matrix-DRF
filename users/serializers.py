@@ -29,19 +29,19 @@ class RegisterSerializer(serializers.ModelSerializer):
         if not data['password']:
             raise serializers.ValidationError({"password": "Passwords is empty"})
         return data
-    
+
     def create(self, validated_data):
         profile_data = validated_data.pop('profile', None)
-        
+
         password = validated_data.pop('password', None)
-        
+
         # Create the user
         user = User.objects.create_user(
-            email=validated_data['email'], 
+            email=validated_data['email'],
             password=password
         )
-        
+
         if profile_data:
             Profile.objects.create(user=user, **profile_data)
-        
+
         return user

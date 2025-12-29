@@ -11,7 +11,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_author')
     created_at = models.DateTimeField(auto_now_add=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='task_comment')
-    project = models.ForeignKey(Project, 
-                                on_delete=models.CASCADE, 
+    project = models.ForeignKey(Project,
+                                on_delete=models.CASCADE,
                                 related_name='project_comment'
     )
