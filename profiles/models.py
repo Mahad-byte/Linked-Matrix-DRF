@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Profile(models.Model):
-    picture = models.ImageField()
+    picture = models.ImageField(null=True)
     role = models.CharField(
         choices={"M": "Manager", "QA": "Quality Assaurance", "Dev": "Developer"},
         default="dev",

@@ -23,7 +23,7 @@ class User(AbstractUser):
         return f"{self.first_name}-$"
 
     def __str__(self):
-        return f"{self.email}"
+        return f"{self.id} - {self.email}"
 
     # Meta (Inner Class)
     class Meta:

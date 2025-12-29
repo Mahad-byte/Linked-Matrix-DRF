@@ -12,17 +12,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "email", "created_at"]
-        read_only_fields = ["id", "created_at"]
+        read_only_fields = ["created_at"]
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    profile = ProfileSerializer()  # Profile is being created itself
+    profile = ProfileSerializer(required=False)  # make nested profile optional
 
     class Meta:
         model = User
         fields = ["id", "email", "password", "profile"]
-        read_only_fields = ["id"]
+        read_only_fields = []
 
     def validate(self, data):
         if not data["password"]:
@@ -33,13 +33,17 @@ class RegisterSerializer(serializers.ModelSerializer):
         profile_data = validated_data.pop("profile", None)
 
         password = validated_data.pop("password", None)
-
+        print("Creating User....")
         # Create the user
         user = User.objects.create_user(
             email=validated_data["email"], password=password
         )
+        print("After creating User....")
 
+        print("Creating Profile...")
+        print("profile data: ", profile_data)
         if profile_data:
-            Profile.objects.create(user=user, **profile_data)
+            profile = Profile.objects.create(user=user, **profile_data)
+            print("created profile? ", profile)
 
         return user
