@@ -21,7 +21,9 @@ class CommentView(APIView):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
             comment = serializer.save()
-            return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+            return Response(
+                CommentSerializer(comment).data, status=status.HTTP_201_CREATED
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

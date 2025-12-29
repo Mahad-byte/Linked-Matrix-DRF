@@ -10,13 +10,12 @@ def task_creation_notification(sender, instance, created, **kwargs):
     if created:
         Notification.objects.create(
             user=instance.project.created_by,
-            text=f"Task {instance.title} has been created"
+            text=f"Task {instance.title} has been created",
         )
 
 
 @receiver(post_delete, sender=Task)
 def task_deletion_notification(sender, instance, **kwargs):
     Notification.objects.create(
-        user=instance.project.created_by,
-        text=f"Task {instance.title} has been Deleted"
+        user=instance.project.created_by, text=f"Task {instance.title} has been Deleted"
     )

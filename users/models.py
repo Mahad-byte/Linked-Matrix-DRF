@@ -13,7 +13,7 @@ class User(AbstractUser):
     )
     phone_number = models.CharField(max_length=11)
     created_at = models.DateTimeField(auto_now_add=True)
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
@@ -27,5 +27,5 @@ class User(AbstractUser):
 
     # Meta (Inner Class)
     class Meta:
-         verbose_name = 'User'
-         ordering = ['-created_at']
+        verbose_name = "User"
+        ordering = ["-created_at"]

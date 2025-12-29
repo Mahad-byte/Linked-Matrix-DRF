@@ -10,7 +10,7 @@ def document_creation_notification(sender, instance, created, **kwargs):
     if created:
         Notification.objects.create(
             user=instance.project.created_by,
-            text=f"Document {instance.name} has been created"
+            text=f"Document {instance.name} has been created",
         )
 
 
@@ -18,5 +18,5 @@ def document_creation_notification(sender, instance, created, **kwargs):
 def document_deletion_notification(sender, instance, **kwargs):
     Notification.objects.create(
         user=instance.project.created_by,
-        text=f"Document {instance.name} has been Deleted"
+        text=f"Document {instance.name} has been Deleted",
     )

@@ -6,16 +6,13 @@ from django.contrib.auth import get_user_model
 class Profile(models.Model):
     picture = models.ImageField()
     role = models.CharField(
-        choices={
-            'M':'Manager',
-            'QA':'Quality Assaurance',
-            'Dev':'Developer'
-        },
-        default='dev'
+        choices={"M": "Manager", "QA": "Quality Assaurance", "Dev": "Developer"},
+        default="dev",
     )
     contact_number = models.CharField(max_length=11)
     user = models.OneToOneField(
-        get_user_model(), on_delete=models.CASCADE,
+        get_user_model(),
+        on_delete=models.CASCADE,
         related_name="user_profile",
-        default=2
+        default=2,
     )

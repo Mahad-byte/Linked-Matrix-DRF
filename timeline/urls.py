@@ -4,5 +4,5 @@ from timeline.views import TimelineView
 
 
 urlpatterns = [
-    path('timeline/', TimelineView.as_view()),
+    path("timeline/", TimelineView.as_view()),
 ]

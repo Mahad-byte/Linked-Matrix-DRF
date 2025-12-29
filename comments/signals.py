@@ -9,14 +9,12 @@ from notifications.models import Notification
 def comment_creation_notification(sender, instance, created, **kwargs):
     if created:
         Notification.objects.create(
-            user=instance.author,
-            text=f"Comment {instance.text} has been created"
+            user=instance.author, text=f"Comment {instance.text} has been created"
         )
 
 
 @receiver(post_delete, sender=Comment)
 def comment_deletion_notification(sender, instance, **kwargs):
     Notification.objects.create(
-        user=instance.user,
-        text=f"Comment {instance.text} has been Deleted"
+        user=instance.user, text=f"Comment {instance.text} has been Deleted"
     )

@@ -5,9 +5,9 @@ from documents.views import DocumentView
 
 
 router = DefaultRouter()
-router.register(r'documents', DocumentView, basename='document')
+router.register(r"documents", DocumentView, basename="document")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

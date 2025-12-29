@@ -9,19 +9,34 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('project', '0001_initial'),
+        ("project", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Document',
+            name="Document",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField()),
-                ('description', models.CharField()),
-                ('file', models.FileField(upload_to='DRF/')),
-                ('version', models.IntegerField()),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='project_document', to='project.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField()),
+                ("description", models.CharField()),
+                ("file", models.FileField(upload_to="DRF/")),
+                ("version", models.IntegerField()),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="project_document",
+                        to="project.project",
+                    ),
+                ),
             ],
         ),
     ]

@@ -9,20 +9,54 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('profiles', '0001_initial'),
-        ('project', '0001_initial'),
+        ("profiles", "0001_initial"),
+        ("project", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField()),
-                ('description', models.CharField()),
-                ('status', models.CharField(choices=[('O', 'Open'), ('R', 'Review'), ('W', 'Working'), ('AR', 'Awaiting Release'), ('WQA', 'Waiting QA')], default='Open')),
-                ('asignee', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='profile_tasks', to='profiles.profile')),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='project_tasks', to='project.project')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField()),
+                ("description", models.CharField()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("O", "Open"),
+                            ("R", "Review"),
+                            ("W", "Working"),
+                            ("AR", "Awaiting Release"),
+                            ("WQA", "Waiting QA"),
+                        ],
+                        default="Open",
+                    ),
+                ),
+                (
+                    "asignee",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="profile_tasks",
+                        to="profiles.profile",
+                    ),
+                ),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="project_tasks",
+                        to="project.project",
+                    ),
+                ),
             ],
         ),
     ]

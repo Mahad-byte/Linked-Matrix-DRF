@@ -10,7 +10,7 @@ def timeline_creation_notification(sender, instance, created, **kwargs):
     if created:
         Notification.objects.create(
             user=instance.project.created_by,
-            text=f"Timeline {instance.time} has been created"
+            text=f"Timeline {instance.time} has been created",
         )
 
 
@@ -18,5 +18,5 @@ def timeline_creation_notification(sender, instance, created, **kwargs):
 def timeline_deletion_notification(sender, instance, **kwargs):
     Notification.objects.create(
         user=instance.project.created_by,
-        text=f"Timeline {instance.time} has been Deleted"
+        text=f"Timeline {instance.time} has been Deleted",
     )

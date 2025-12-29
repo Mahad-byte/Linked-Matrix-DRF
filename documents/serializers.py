@@ -10,7 +10,7 @@ class DocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ['id', 'name', 'description', 'file', 'version', 'project']
+        fields = ["id", "name", "description", "file", "version", "project"]
 
     def validate_file(self, value):
         if not value:
@@ -18,6 +18,6 @@ class DocumentSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        if not validated_data.get('version'):
-            validated_data['version'] = '1.0'
+        if not validated_data.get("version"):
+            validated_data["version"] = "1.0"
         return super().create(validated_data)

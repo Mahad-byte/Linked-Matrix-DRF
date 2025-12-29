@@ -9,14 +9,12 @@ from notifications.models import Notification
 def profile_creation_notification(sender, instance, created, **kwargs):
     if created:
         Notification.objects.create(
-            user=instance.user,
-            text=f"Profile {instance.role} has been created"
+            user=instance.user, text=f"Profile {instance.role} has been created"
         )
 
 
 @receiver(post_delete, sender=Profile)
 def profile_deletion_notification(sender, instance, **kwargs):
     Notification.objects.create(
-        user=instance.user,
-        text=f"Profile {instance.role} has been Deleted"
+        user=instance.user, text=f"Profile {instance.role} has been Deleted"
     )

@@ -5,9 +5,9 @@ from project.views import ProjectView
 
 
 router = DefaultRouter()
-router.register(r'projects', ProjectView, basename='project')
+router.register(r"projects", ProjectView, basename="project")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

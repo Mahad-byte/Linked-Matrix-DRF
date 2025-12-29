@@ -10,16 +10,20 @@ class Task(models.Model):
     description = models.CharField()
     status = models.CharField(
         choices={
-            'O':'Open',
-            'R':'Review',
-            'W':'Working',
-            'AR':'Awaiting Release',
-            'WQA':'Waiting QA'
+            "O": "Open",
+            "R": "Review",
+            "W": "Working",
+            "AR": "Awaiting Release",
+            "WQA": "Waiting QA",
         },
-        default='Open'
+        default="Open",
     )
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_tasks')
-    asignee = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile_tasks')
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="project_tasks"
+    )
+    asignee = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="profile_tasks"
+    )
 
     def __str__(self):
         return f"{self.title}, {self.description}"

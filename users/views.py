@@ -26,7 +26,7 @@ class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        token = RefreshToken(request.data.get('refresh'))
+        token = RefreshToken(request.data.get("refresh"))
         print(token)
         token.blacklist()
         return Response("Logout Succedded")

@@ -5,9 +5,9 @@ from profiles.views import ProfileView
 
 
 router = DefaultRouter()
-router.register(r'profiles', ProfileView, basename='profile')
+router.register(r"profiles", ProfileView, basename="profile")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

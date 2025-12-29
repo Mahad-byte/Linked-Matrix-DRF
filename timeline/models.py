@@ -7,10 +7,12 @@ from project.models import Project
 class Timeline(models.Model):
     event_type = models.CharField(
         choices={
-            'C':'created',
-            'U':'updated',
-            'D':'deleted',
+            "C": "created",
+            "U": "updated",
+            "D": "deleted",
         }
     )
     time = models.DateTimeField(auto_now_add=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='project_timeline')
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="project_timeline"
+    )

@@ -12,33 +12,32 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'created_at']
-        read_only_fields = ['id', 'created_at']
+        fields = ["id", "email", "created_at"]
+        read_only_fields = ["id", "created_at"]
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    profile = ProfileSerializer() # Profile is being created itself
+    profile = ProfileSerializer()  # Profile is being created itself
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'password', 'profile']
-        read_only_fields = ['id']
+        fields = ["id", "email", "password", "profile"]
+        read_only_fields = ["id"]
 
     def validate(self, data):
-        if not data['password']:
+        if not data["password"]:
             raise serializers.ValidationError({"password": "Passwords is empty"})
         return data
 
     def create(self, validated_data):
-        profile_data = validated_data.pop('profile', None)
+        profile_data = validated_data.pop("profile", None)
 
-        password = validated_data.pop('password', None)
+        password = validated_data.pop("password", None)
 
         # Create the user
         user = User.objects.create_user(
-            email=validated_data['email'],
-            password=password
+            email=validated_data["email"], password=password
         )
 
         if profile_data:

@@ -7,7 +7,7 @@ class TimelineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Timeline
-        fields = ['event_type', 'project', 'time']
+        fields = ["event_type", "project", "time"]
 
     def validate_event(self, value):
         if not value:

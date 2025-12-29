@@ -4,12 +4,21 @@ from profiles.models import Profile
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    team_members = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all(), many=True, required=False)
+    team_members = serializers.PrimaryKeyRelatedField(
+        queryset=Profile.objects.all(), many=True, required=False
+    )
 
     class Meta:
         model = Project
-        fields = ['id', 'title', 'description', 'start_date', 'end_date', 'team_members']
-        read_only_fields = ['start_date', 'end_date']
+        fields = [
+            "id",
+            "title",
+            "description",
+            "start_date",
+            "end_date",
+            "team_members",
+        ]
+        read_only_fields = ["start_date", "end_date"]
 
     def validate_title(self, value):
         if not value or not value.strip():
@@ -17,7 +26,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        members = validated_data.pop('team_members', [])
+        members = validated_data.pop("team_members", [])
         project = Project.objects.create(**validated_data)
         if members:
             project.team_members.set(members)
