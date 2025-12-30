@@ -26,7 +26,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "project",
             "asignee",
         ]
-        read_only_fields = ["id"]
+        read_only_fields = ["id", "project"]
 
     def validate_title(self, value):
         if not value or not value.strip():
@@ -34,7 +34,8 @@ class TaskSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        validated_data.pop("project")
+        print("validated data in task: ", validated_data)
+        # validated_data.pop("project")
         if not validated_data.get("status"):
             validated_data["status"] = "todo"
         return super().create(validated_data)

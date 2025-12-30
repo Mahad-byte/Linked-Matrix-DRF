@@ -10,16 +10,17 @@ User = get_user_model()
 class TaskAPITest(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            id=2, email="user2@example.com", password="1234"
+            id=2, email="user16@user15.com", password="1234"
         )
         self.client.force_authenticate(user=self.user)
 
-    def test_create_task_via_api(self):  # TODO
+    def test_create_task_via_api(self):
         prof_resp = self.client.post(
             "/api/profiles/",
             {"role": "Dev", "contact_number": "1234567890"},
             format="json",
         )
+        print("Response of profile task: ", prof_resp)
         self.assertEqual(prof_resp.status_code, status.HTTP_201_CREATED)
         profile_id = prof_resp.data["id"]
         proj_resp = self.client.post(
@@ -27,16 +28,19 @@ class TaskAPITest(APITestCase):
             {"title": "Proj Task", "description": "desc"},
             format="json",
         )
+        print("create project res: ", proj_resp)
         self.assertEqual(proj_resp.status_code, status.HTTP_201_CREATED)
         project_id = proj_resp.data["id"]
         task_data = {
             "title": "Task A",
             "description": "details",
             "status": "O",
-            "project": project_id,
+            "project_id": project_id,
             "asignee": profile_id,
         }
         task_resp = self.client.post("/api/tasks/", task_data, format="json")
+        print("task creation response: ", task_resp)
+        print(task_resp.data)
         self.assertEqual(task_resp.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Task.objects.count(), 1)
         self.assertTrue(str(task_resp.data.get("id")))

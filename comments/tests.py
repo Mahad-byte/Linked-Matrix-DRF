@@ -13,11 +13,11 @@ User = get_user_model()
 class CommentAPITest(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            id=2, email="user2@example.com", password="1234"
+            id=2, email="user16@user15.com", password="1234"
         )
         self.client.force_authenticate(user=self.user)
 
-    def test_create_comment_via_api(self):  # TODO
+    def test_create_comment_via_api(self):
         prof_resp = self.client.post(
             "/api/profiles/",
             {"role": "Dev", "contact_number": "1234567890"},
@@ -32,17 +32,16 @@ class CommentAPITest(APITestCase):
         )
         self.assertEqual(proj_resp.status_code, status.HTTP_201_CREATED)
         project_id = proj_resp.data["id"]
-        # create task
         task_data = {
             "title": "Task 1",
             "description": "do something",
-            "project": project_id,
+            "project_id": project_id,
             "asignee": profile_id,
         }
         task_resp = self.client.post("/api/tasks/", task_data, format="json")
+        print(task_resp)
         self.assertEqual(task_resp.status_code, status.HTTP_201_CREATED)
         task_id = task_resp.data["id"]
-        # create comment
         comment_data = {
             "text": "Nice work",
             "author": self.user.id,

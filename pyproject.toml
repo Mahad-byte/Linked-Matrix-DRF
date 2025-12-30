@@ -1,7 +1,7 @@
-target-version = "py313"
+target-version = "py310"
 
 [tool.black]
-target-version = ["py313"]
+target-version = ["py310"]
 
 [tool.isort]
 profile = "black"

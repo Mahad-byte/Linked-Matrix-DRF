@@ -7,7 +7,7 @@ class Profile(models.Model):
     picture = models.ImageField(null=True)
     role = models.CharField(
         choices={"M": "Manager", "QA": "Quality Assaurance", "Dev": "Developer"},
-        default="dev",
+        default="Dev",
     )
     contact_number = models.CharField(max_length=11)
     user = models.OneToOneField(
