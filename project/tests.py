@@ -12,7 +12,16 @@ class ProjectAPITest(APITestCase):
         self.user = User.objects.create_user(
             id=2, email="user16@user15.com", password="1234"
         )
-        self.client.force_authenticate(user=self.user)
+        login_resp = self.client.post(
+            "/api/login/",
+            {"email": self.user_data["email"], "password": self.user_data["password"]},
+            format="json",
+        )
+        self.assertEqual(login_resp.status_code, status.HTTP_200_OK)
+        access = login_resp.data.get("access")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {access}")
+
+        self.user = User.objects.get(email=self.user_data["email"])
 
     def test_create_project_via_api(self):
         data = {"title": "Proj1", "description": "desc"}

@@ -17,9 +17,10 @@ class ProjectSerializer(serializers.ModelSerializer):
             "description",
             "start_date",
             "end_date",
+            "created_by",
             "team_members",
         ]
-        read_only_fields = ["start_date", "end_date"]
+        read_only_fields = ["start_date", "end_date", "created_by"]
 
     def validate_title(self, value):
         if not value or not value.strip():
@@ -28,6 +29,9 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         members = validated_data.pop("team_members", [])
+        request = self.context.get("request")
+        if request:
+            validated_data["created_by"] = request.user
         project = Project.objects.create(**validated_data)
         if members:
             project.team_members.set(members)

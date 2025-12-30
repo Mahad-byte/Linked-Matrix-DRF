@@ -1,18 +1,19 @@
-import uuid
-
 from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-
-from users.serializers import RegisterSerializer
 
 # Create your tests here.
 User = get_user_model()
 
 
-class UserAPITest(APITestCase):  # TODO
+class UserAPITest(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            id=2, email="user16@user15.com", password="1234"
+        )
+        self.client.force_authenticate(user=self.user)
+
     def test_user_create(self):
         url = reverse("register")
         data = {
@@ -34,12 +35,11 @@ class UserAPITest(APITestCase):  # TODO
 
     def test_duplicate_email(self):
         url = reverse("register")
-        data = {"email": "user16@user15.com", "password": "1234"}
-        response1 = self.client.post(url, data, format="json")
+        response1 = self.client.post(url, self.user, format="json")
         print("duplicate: ", response1.data)
         self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
         # Attempt to register same email again
-        response2 = self.client.post(url, data, format="json")
+        response2 = self.client.post(url, self.user, format="json")
         print("duplicate2: ", response2.data)
         self.assertEqual(response2.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(User.objects.filter(email="user16@user15.com").count(), 1)

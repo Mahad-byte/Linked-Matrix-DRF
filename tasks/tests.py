@@ -7,22 +7,29 @@ from tasks.models import Task
 User = get_user_model()
 
 
-class TaskAPITest(APITestCase):
+class TaskAPITest(APITestCase):  # TODO check signal
     def setUp(self):
-        self.user = User.objects.create_user(
-            id=2, email="user16@user15.com", password="1234"
-        )
-        self.client.force_authenticate(user=self.user)
+        self.user_data = {
+            "email": "user16@user15.com",
+            "password": "1234",
+            "profile": {"role": "Dev", "contact_number": "1234567890"},
+        }
+        reg_resp = self.client.post("/api/register/", self.user_data, format="json")
+        self.assertEqual(reg_resp.status_code, status.HTTP_201_CREATED)
 
-    def test_create_task_via_api(self):
-        prof_resp = self.client.post(
-            "/api/profiles/",
-            {"role": "Dev", "contact_number": "1234567890"},
+        login_resp = self.client.post(
+            "/api/login/",
+            {"email": self.user_data["email"], "password": self.user_data["password"]},
             format="json",
         )
-        print("Response of profile task: ", prof_resp)
-        self.assertEqual(prof_resp.status_code, status.HTTP_201_CREATED)
-        profile_id = prof_resp.data["id"]
+        self.assertEqual(login_resp.status_code, status.HTTP_200_OK)
+        access = login_resp.data.get("access")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {access}")
+
+        self.user = User.objects.get(email=self.user_data["email"])
+
+    def test_create_task_via_api(self):
+        profile_id = self.user.user_profile.id
         proj_resp = self.client.post(
             "/api/projects/",
             {"title": "Proj Task", "description": "desc"},
